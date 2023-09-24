@@ -14,19 +14,51 @@ const StackNavigator = () => {
   function BottomTabs() {
     return (
       <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        options=
-        {{
-          tabBarLabel: "Home",
-          TabBarLabelStyle: { color: "#000E97" },
-          headerShown: false,
-          tabBarIcon: ({ focus }) =>
-            focused ? (
-              <Entypo name="home" size={24} color="black" />
-            ) : (
-              <Feather name="home" size={24} color="black" />
-            ),
-        }}
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: "Home",
+            TabBarLabelStyle: { color: "#000E97" },
+            headerShown: false,
+            tabBarIcon: ({ focus }) =>
+              focused ? (
+                <Entypo name="home" size={24} color="black" />
+              ) : (
+                <Feather name="home" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: "Profile",
+            TabBarLabelStyle: { color: "#000E97" },
+            headerShown: false,
+            tabBarIcon: ({ focus }) =>
+              focused ? (
+                <Entypo name="home" size={24} color="black" />
+              ) : (
+                <Feather name="home" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: "Cart",
+            TabBarLabelStyle: { color: "#000E97" },
+            headerShown: false,
+            tabBarIcon: ({ focus }) =>
+              focused ? (
+                <Entypo name="home" size={24} color="black" />
+              ) : (
+                <Feather name="home" size={24} color="black" />
+              ),
+          }}
+        />
       </Tab.Navigator>
     );
   }
