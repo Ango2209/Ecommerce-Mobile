@@ -24,7 +24,7 @@ const RegisterScreen = () => {
       email: email,
       password: password,
     };
-    axios.post("http://localhost:8000/api/auth/login", user);
+    axios.post("https://easy-blue-bluefish-vest.cyclic.app/api/user/register", user);
   };
   return (
     <SafeAreaView
