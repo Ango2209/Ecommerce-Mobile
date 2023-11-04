@@ -24,7 +24,10 @@ const RegisterScreen = () => {
       email: email,
       password: password,
     };
-    axios.post("https://easy-blue-bluefish-vest.cyclic.app/api/user/register", user);
+    axios.post(
+      "https://easy-blue-bluefish-vest.cyclic.app/api/user/register",
+      user
+    );
   };
   return (
     <SafeAreaView
@@ -100,7 +103,7 @@ const RegisterScreen = () => {
             />
             <TextInput
               value={email}
-              onChangeText={(text) => setPassword(text)}
+              onChangeText={(text) => setEmail(text)}
               style={{
                 color: "gray",
                 marginVertical: 10,

@@ -11,7 +11,7 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -27,14 +27,26 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        if (token) {
+          navigation.replace("Home");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    checkLoginStatus();
+  }, []);
   const handleLogin = () => {
     const user = {
       email: email,
       password: password,
     };
     axios
-      .post("https://easy-blue-bluefish-vest.cyclic.app/api/user/login", user)
+      .post("http://localhost:5000/api/user/login", user)
       .then((response) => {
         console.log(response);
         const token = response.data.token;

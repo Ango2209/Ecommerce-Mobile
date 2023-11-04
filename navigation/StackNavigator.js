@@ -8,6 +8,11 @@ import HomeScreen from "../screens/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import ProductInfoSreen from "../screens/ProductInfoSreen";
+import CartScreen from "../screens/CartScreen";
+import CheckoutScreen from "../screens/CheckoutScreen";
+import AddressScreen from "../screens/AddressScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -22,7 +27,7 @@ const StackNavigator = () => {
             tabBarLabel: "Home",
             TabBarLabelStyle: { color: "#000E97" },
             headerShown: false,
-            tabBarIcon: ({ focus }) =>
+            tabBarIcon: ({ focused }) =>
               focused ? (
                 <Entypo name="home" size={24} color="black" />
               ) : (
@@ -37,11 +42,11 @@ const StackNavigator = () => {
             tabBarLabel: "Profile",
             TabBarLabelStyle: { color: "#000E97" },
             headerShown: false,
-            tabBarIcon: ({ focus }) =>
+            tabBarIcon: ({ focused }) =>
               focused ? (
-                <Entypo name="home" size={24} color="black" />
+                <Ionicons name="person" size={24} color="black" />
               ) : (
-                <Feather name="home" size={24} color="black" />
+                <Ionicons name="person-outline" size={24} color="black" />
               ),
           }}
         />
@@ -52,11 +57,11 @@ const StackNavigator = () => {
             tabBarLabel: "Cart",
             TabBarLabelStyle: { color: "#000E97" },
             headerShown: false,
-            tabBarIcon: ({ focus }) =>
+            tabBarIcon: ({ focused }) =>
               focused ? (
-                <Entypo name="home" size={24} color="black" />
+                <Ionicons name="cart-sharp" size={24} color="black" />
               ) : (
-                <Feather name="home" size={24} color="black" />
+                <Ionicons name="cart-outline" size={24} color="black" />
               ),
           }}
         />
@@ -66,6 +71,28 @@ const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={CartScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Checkout"
+          component={CheckoutScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Address"
+          component={AddressScreen}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -77,8 +104,14 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Main"
+          component={BottomTabs}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Info"
+          component={ProductInfoSreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
