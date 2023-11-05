@@ -14,11 +14,12 @@ import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+
 import axios from "axios";
 import ProductItem from "../components/ProductItem";
 import DropDownPicker from "react-native-dropdown-picker";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
+import { useNavigation } from "@react-navigation/native";
 const HomeScreen = () => {
   const list = [
     {
@@ -202,7 +203,6 @@ const HomeScreen = () => {
     );
 
     setListProducts(response?.data?.data?.data);
-    console.log(response?.data);
   };
   const getCategories = async () => {
     const listItems = [];
@@ -214,7 +214,6 @@ const HomeScreen = () => {
       listItems.push({ label: item?.title, value: item.title });
     });
     setItems(listItems);
-    console.log(listItems);
   };
   useEffect(() => {
     try {
@@ -229,9 +228,8 @@ const HomeScreen = () => {
   }, []);
   const images =
     "https://img.etimg.com/thumb/msid-93051525,width-1070,height-580,imgsize-2243475,overlay-economictimes/photo.jpg";
-  const clickModal = () => {
-    setModalVisible(!modalVisible);
-  };
+
+  const navigation = useNavigation();
   return (
     <>
       <SafeAreaView
@@ -244,7 +242,7 @@ const HomeScreen = () => {
         <ScrollView>
           <View
             style={{
-              backgroundColor: "#00CED1",
+              backgroundColor: "rgb(216, 216, 216)",
               padding: 10,
               flexDirection: "row",
               alignItems: "center",
@@ -273,7 +271,9 @@ const HomeScreen = () => {
                 style={{ width: "100%", height: "100%" }}
               />
             </Pressable>
-            <Feather name="mic" size={24} color="black" />
+            <Pressable onPress={() => navigation.navigate("Cart")}>
+              <AntDesign name="shoppingcart" size={24} color="black" />
+            </Pressable>
           </View>
           <Pressable
             onPress={() => setModalVisible(!modalVisible)}

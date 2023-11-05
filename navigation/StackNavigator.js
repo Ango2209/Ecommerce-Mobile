@@ -72,6 +72,11 @@ const StackNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
@@ -81,7 +86,6 @@ const StackNavigator = () => {
           component={CartScreen}
           options={{ headerShown: false }}
         />
-
         <Stack.Screen
           name="Checkout"
           component={CheckoutScreen}
@@ -90,12 +94,6 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Address"
           component={AddressScreen}
-          options={{ headerShown: false }}
-        />
-
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -108,7 +106,6 @@ const StackNavigator = () => {
           component={BottomTabs}
           options={{ headerShown: false }}
         />
-
         <Stack.Screen
           name="Info"
           component={ProductInfoSreen}

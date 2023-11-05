@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { addOrder } from "../features/orders/orderSlice";
+import HeaderBack from "../components/HeaderBack";
 
 const CheckoutScreen = () => {
   const steps = [
@@ -62,21 +63,10 @@ const CheckoutScreen = () => {
         },
         orderItems: userCartState,
         totalPrice: subTotal,
-        totalPriceAfterDiscount: selectedAddress,
+        totalPriceAfterDiscount: subTotal,
         paymentInfo: selectedOption,
       };
       dispatch(addOrder(orderData));
-      // const response = await axios.post(
-      //   "http://localhost:8000/orders",
-      //   orderData
-      // );
-      // if (response.status === 200) {
-      //   navigation.navigate("Order");
-      //   dispatch(cleanCart());
-      //   console.log("order created successfully", response.data);
-      // } else {
-      //   console.log("error creating order", response.data);
-      // }
     } catch (error) {
       console.log("errror", error);
     }
@@ -85,7 +75,7 @@ const CheckoutScreen = () => {
   return (
     <>
       <ScrollView style={{}}>
-        <HeaderBack navigate={"Cart"} title={"Our Cart"} />
+        <HeaderBack navigate={"Cart"} title={"Check out"} />
         <View style={{ flex: 1, paddingHorizontal: 20, paddingTop: 40 }}>
           <View
             style={{

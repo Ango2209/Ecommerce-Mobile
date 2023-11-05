@@ -40,13 +40,13 @@ const CartScreen = () => {
     dispatch(removeFrCart(id));
     setTimeout(() => {
       dispatch(getUserCart());
-    }, 100);
+    }, 500);
   };
   const updateCartProduct = (id, quantity) => {
     dispatch(updateFrCart({ cartItemId: id, quantity }));
     setTimeout(() => {
       dispatch(getUserCart());
-    }, 100);
+    }, 500);
   };
 
   const navigation = useNavigation();
@@ -98,12 +98,12 @@ const CartScreen = () => {
                       numberOfLines={3}
                       style={{ width: 150, marginTop: 10 }}
                     >
-                      {item?.title}
+                      {item?.productId?.title}
                     </Text>
                     <Text
                       style={{ fontSize: 20, fontWeight: "bold", marginTop: 6 }}
                     >
-                      {item?.price}
+                      {item?.price} $
                     </Text>
                     <Image
                       style={{ width: 30, height: 30, resizeMode: "contain" }}
@@ -153,7 +153,7 @@ const CartScreen = () => {
                       </Pressable>
                     ) : (
                       <Pressable
-                        onPress={() => removeProduct(item)}
+                        onPress={() => removeProduct(item?._id)}
                         style={{
                           backgroundColor: "#D8D8D8",
                           padding: 7,
@@ -251,7 +251,7 @@ const CartScreen = () => {
           }}
         >
           <Text style={{ fontSize: 18, fontWeight: "400" }}>Subtotal : </Text>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>{subTotal}</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>{subTotal} $</Text>
         </View>
         <Pressable
           onPress={() => navigation.navigate("Checkout", { subTotal })}
