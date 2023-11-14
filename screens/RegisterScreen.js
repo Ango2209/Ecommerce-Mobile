@@ -13,22 +13,19 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../features/auth/authSlice";
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const navigation = useNavigation();
-  const handleRegister = () => {
-    const user = {
-      email: email,
-      password: password,
-    };
-    axios.post(
-      "https://easy-blue-bluefish-vest.cyclic.app/api/user/register",
-      user
-    );
-  };
+  const dispatch = useDispatch();
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}
@@ -73,15 +70,44 @@ const RegisterScreen = () => {
               style={{ marginLeft: 8 }}
             />
             <TextInput
-              value={name}
-              onChangeText={(text) => setName(text)}
+              value={firstName}
+              onChangeText={(text) => setFirstName(text)}
               style={{
                 color: "gray",
                 marginVertical: 10,
                 width: 300,
                 fontSize: name ? 16 : 16,
               }}
-              placeholder="enter your name"
+              placeholder="enter your first name"
+            ></TextInput>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+              backgroundColor: "#D0D0D0",
+              paddingVertical: 5,
+              borderRadius: 5,
+              marginTop: 30,
+            }}
+          >
+            <Ionicons
+              name="ios-person"
+              size={24}
+              color="gray"
+              style={{ marginLeft: 8 }}
+            />
+            <TextInput
+              value={lastName}
+              onChangeText={(text) => setLastName(text)}
+              style={{
+                color: "gray",
+                marginVertical: 10,
+                width: 300,
+                fontSize: name ? 16 : 16,
+              }}
+              placeholder="enter your last name"
             ></TextInput>
           </View>
           <View
@@ -111,6 +137,35 @@ const RegisterScreen = () => {
                 fontSize: email ? 16 : 16,
               }}
               placeholder="enter your email"
+            ></TextInput>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+              backgroundColor: "#D0D0D0",
+              paddingVertical: 5,
+              borderRadius: 5,
+              marginTop: 30,
+            }}
+          >
+            <Feather
+              style={{ marginLeft: 8 }}
+              name="phone"
+              size={24}
+              color="gray"
+            />
+            <TextInput
+              value={mobileNumber}
+              onChangeText={(text) => setMobileNumber(text)}
+              style={{
+                color: "gray",
+                marginVertical: 10,
+                width: 300,
+                fontSize: name ? 16 : 16,
+              }}
+              placeholder="enter your mobile number"
             ></TextInput>
           </View>
         </View>
@@ -163,6 +218,17 @@ const RegisterScreen = () => {
             marginRight: "auto",
             padding: 15,
           }}
+          onPress={() => {
+            dispatch(
+              registerUser({
+                firstName,
+                lastName,
+                email,
+                mobileNumber,
+                password,
+              })
+            );
+          }}
         >
           <Text
             style={{
@@ -172,7 +238,7 @@ const RegisterScreen = () => {
               fontWeight: "bold",
             }}
           >
-            Login
+            Sign up
           </Text>
         </Pressable>
         <Pressable

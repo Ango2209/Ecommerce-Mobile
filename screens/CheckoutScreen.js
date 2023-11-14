@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { addOrder } from "../features/orders/orderSlice";
 import HeaderBack from "../components/HeaderBack";
-
+const data = [];
 const CheckoutScreen = () => {
   const steps = [
     { title: "Address", content: "Address Form" },
@@ -43,6 +43,19 @@ const CheckoutScreen = () => {
   const subTotal = route.params.subTotal;
   console.log(subTotal);
   const userCartState = useSelector((state) => state?.orders?.userCart);
+  const [orderItem, setOrderItem] = useState([]);
+
+  useEffect(() => {
+    userCartState?.map((item) => {
+      console.log(item);
+      data.push({
+        product: item?.productId?._id,
+        quantity: item?.quantity,
+        price: item?.price,
+        color: item?.productId?.color[0],
+      });
+    });
+  }, []);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [mobileNo, setMobileNo] = useState("");
@@ -54,17 +67,27 @@ const CheckoutScreen = () => {
   const [option, setOption] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const handlePlaceOrder = async () => {
+    setCurrentStep(4);
     try {
       const orderData = {
         shippingInfo: {
-          address: selectedAddress,
-          firstName: name,
-          pinCode: postalCode,
+          address: "36/50 Tx24",
+          city: "Ho Chi Minh",
+          state: "delivering",
+          pinCode: "1222",
+          country: "Viet Nam",
+          firstName: "ngo",
+          lastName: "Nguyen",
+          pinCode: "1111",
+          other: "dfdf",
         },
-        orderItems: userCartState,
+        orderItems: data,
         totalPrice: subTotal,
         totalPriceAfterDiscount: subTotal,
-        paymentInfo: selectedOption,
+        paymentInfo: {
+          razorpayPaymentId: "ass",
+          razorpayOrderId: "bcc",
+        },
       };
       dispatch(addOrder(orderData));
     } catch (error) {
@@ -556,6 +579,20 @@ const CheckoutScreen = () => {
             >
               <Text>Place your order</Text>
             </Pressable>
+          </View>
+        )}
+        {currentStep == 4 && (
+          <View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FontAwesome5 name="smile-beam" size={30} color="green" />
+              <h2 style={{ color: "green" }}>Place Order Successfully</h2>
+            </View>
           </View>
         )}
       </ScrollView>

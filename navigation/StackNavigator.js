@@ -12,7 +12,8 @@ import { Ionicons } from "@expo/vector-icons";
 import ProductInfoSreen from "../screens/ProductInfoSreen";
 import CartScreen from "../screens/CartScreen";
 import CheckoutScreen from "../screens/CheckoutScreen";
-import AddressScreen from "../screens/AddressScreen";
+
+import ProfileScreen from "../screens/ProfileScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -91,11 +92,7 @@ const StackNavigator = () => {
           component={CheckoutScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Address"
-          component={AddressScreen}
-          options={{ headerShown: false }}
-        />
+
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
@@ -109,6 +106,12 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Info"
           component={ProductInfoSreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

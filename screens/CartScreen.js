@@ -19,6 +19,7 @@ import {
   updateFrCart,
 } from "../features/orders/orderSlice";
 import HeaderBack from "../components/HeaderBack";
+import Footer from "../components/Footer";
 
 const CartScreen = () => {
   const dispatch = useDispatch();

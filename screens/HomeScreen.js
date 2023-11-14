@@ -20,6 +20,9 @@ import ProductItem from "../components/ProductItem";
 import DropDownPicker from "react-native-dropdown-picker";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../features/products/productSlice";
+import Footer from "../components/Footer";
 const HomeScreen = () => {
   const list = [
     {
@@ -197,13 +200,12 @@ const HomeScreen = () => {
   const [street, setStreet] = useState("");
   const [landmark, setLandmark] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const getProducts = async () => {
-    const response = await axios.get(
-      "https://easy-blue-bluefish-vest.cyclic.app/api/product"
-    );
+  const dispatch = useDispatch();
 
-    setListProducts(response?.data?.data?.data);
-  };
+  const productsState = useSelector(
+    (state) => state?.products?.products?.data?.data
+  );
+
   const getCategories = async () => {
     const listItems = [];
     const response = await axios.get(
@@ -217,7 +219,8 @@ const HomeScreen = () => {
   };
   useEffect(() => {
     try {
-      getProducts();
+      dispatch(getAllProducts());
+
       getCategories();
     } catch (e) {
       console.log(e);
@@ -226,8 +229,6 @@ const HomeScreen = () => {
   const onGenderOpen = useCallback(() => {
     setCompanyOpen(false);
   }, []);
-  const images =
-    "https://img.etimg.com/thumb/msid-93051525,width-1070,height-580,imgsize-2243475,overlay-economictimes/photo.jpg";
 
   const navigation = useNavigation();
   return (
@@ -259,6 +260,7 @@ const HomeScreen = () => {
                 height: 38,
                 flex: 1,
               }}
+              onPress={() => navigation.navigate("Search")}
             >
               <AntDesign
                 style={{ paddingLeft: 10 }}
@@ -273,6 +275,12 @@ const HomeScreen = () => {
             </Pressable>
             <Pressable onPress={() => navigation.navigate("Cart")}>
               <AntDesign name="shoppingcart" size={24} color="black" />
+            </Pressable>
+            <Pressable
+              style={{ marginLeft: 18 }}
+              onPress={() => navigation.navigate("Profile")}
+            >
+              <Ionicons name="person" size={24} color="black" />
             </Pressable>
           </View>
           <Pressable
@@ -321,12 +329,33 @@ const HomeScreen = () => {
               </Pressable>
             ))}
           </ScrollView>
-          <Image
-            source={{ uri: images }}
-            style={{ width: "100%", height: "200px" }}
-          />
+          <View
+            style={{
+              width: "100%",
+              height: "200px",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <View style={{ width: "65%", marginRight: 8 }}>
+              <Image
+                source={require("../assets/main-banner-1.jpg")}
+                style={{ width: "100%", height: "200px" }}
+              />
+            </View>
+            <View style={{ width: "32%" }}>
+              <Image
+                source={require("../assets/catbanner-01.jpg")}
+                style={{ width: "100%", height: "100px" }}
+              />
+              <Image
+                source={require("../assets/catbanner-02.jpg")}
+                style={{ width: "100%", height: "100px" }}
+              />
+            </View>
+          </View>
           <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
-            Trending Deals of the week
+            Featured Collection
           </Text>
           <View
             style={{
@@ -336,28 +365,31 @@ const HomeScreen = () => {
             }}
           >
             {" "}
-            {deals?.map((item, index) => {
-              return (
-                <Pressable
-                  key={index}
-                  style={{
-                    marginVertical: 10,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    width: "50%",
-                  }}
-                >
-                  <Image
+            {productsState
+              ?.filter((item) => (item.tags === "features" ? item : ""))
+              ?.map((item, index) => {
+                console.log(item);
+                return (
+                  <Pressable
+                    key={index}
                     style={{
-                      width: "180px",
-                      height: "180px",
-                      resizeMode: "contain",
+                      marginVertical: 10,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      width: "50%",
                     }}
-                    source={{ uri: item.image }}
-                  />
-                </Pressable>
-              );
-            })}
+                  >
+                    <Image
+                      style={{
+                        width: "180px",
+                        height: "180px",
+                        resizeMode: "contain",
+                      }}
+                      source={{ uri: item.image[0].url }}
+                    />
+                  </Pressable>
+                );
+              })}
           </View>
           <Text
             style={{
@@ -452,7 +484,7 @@ const HomeScreen = () => {
               flexWrap: "wrap",
             }}
           >
-            {listProducts
+            {productsState
               ?.filter((item) =>
                 category == "" ? item : item.category === category
               )
@@ -460,8 +492,10 @@ const HomeScreen = () => {
                 return <ProductItem key={index} item={item} />;
               })}
           </View>
+          <Footer />
         </ScrollView>
       </SafeAreaView>
+
       {/* <ModalContent modalVisible={modalVisible} clickModal={clickModal} /> */}
       <BottomModal
         onBackdropPress={() => setModalVisible(!modalVisible)}

@@ -22,6 +22,7 @@ import {
   getUserOrders,
 } from "../features/orders/orderSlice";
 import { addRating, getAProduct } from "../features/products/productSlice";
+import Footer from "../components/Footer";
 const ProductInfoScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const route = useRoute();
@@ -135,30 +136,6 @@ const ProductInfoScreen = () => {
 
         <Text style={{ height: 1, borderColor: "#D0D0D0", borderWidth: 1 }} />
 
-        <View
-          style={{
-            paddingLeft: 10,
-            paddingRight: 10,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignContent: "center",
-            justifyItems: "center",
-            marginTop: 10,
-            marginBottom: 12,
-          }}
-        >
-          <View style={{}}>Customer Reviews : </View>
-          <View>
-            <ReactStars
-              count={5}
-              size={24}
-              value={4}
-              edit={false}
-              activeColor="#ffd700"
-            />
-          </View>
-          <View> {singleProductState?.ratings?.length} reviews </View>
-        </View>
         <Text style={{ height: 1, borderColor: "#D0D0D0", borderWidth: 1 }} />
 
         <View style={{ padding: 10 }}>
@@ -224,23 +201,32 @@ const ProductInfoScreen = () => {
           </Pressable>
         )}
 
-        <h3 style={{ margin: 24 }}>Reviews</h3>
-        <View
-          style={{
-            height: 1,
-            borderColor: "#D0D0D0",
-            borderWidth: 1,
-            marginTop: 10,
-          }}
-        />
-
         <View
           style={{
             alignItems: "center",
             width: "100%",
-            backgroundColor: " #efefef",
+            backgroundColor: "rgb(233 233 233)",
+            marginBottom: "15px",
           }}
         >
+          <h3 style={{ margin: 16 }}>Reviews</h3>
+          <View
+            style={{
+              paddingLeft: 10,
+              paddingRight: 10,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignContent: "center",
+              justifyItems: "center",
+              marginTop: 10,
+              marginBottom: 12,
+            }}
+          >
+            <View style={{}}>Customer Reviews : </View>
+
+            <View> {singleProductState?.ratings?.length} reviews </View>
+          </View>
+
           <View style={{ width: "100%" }}>
             <View>
               <View></View>
@@ -354,7 +340,7 @@ const ProductInfoScreen = () => {
                     style={{
                       width: "120px",
                       height: "35px",
-                      backgroundColor: "#FFAC1C",
+                      backgroundColor: "#febd69",
                       alignItems: "center",
                       justifyContent: "center",
                       borderRadius: "5px",
@@ -368,7 +354,9 @@ const ProductInfoScreen = () => {
             </View>
           </View>
         </View>
+        <Footer />
       </ScrollView>
+
       <BottomModal
         onBackdropPress={() => setModalVisible(!modalVisible)}
         swipeDirection={["up", "down"]}

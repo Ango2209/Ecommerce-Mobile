@@ -23,12 +23,20 @@ const HeaderBack = ({ navigate, title }) => {
         <Ionicons name="arrow-back-outline" size={24} color="black" />
       </Pressable>
       <View style={{ fontSize: "25px" }}>{title}</View>
-      <Pressable
-        style={{ marginRight: 12 }}
-        onPress={() => navigation.navigate("Cart")}
-      >
-        <AntDesign name="shoppingcart" size={24} color="black" />
-      </Pressable>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Pressable
+          style={{ marginRight: 12 }}
+          onPress={() => navigation.navigate("Cart")}
+        >
+          <AntDesign name="shoppingcart" size={24} color="black" />
+        </Pressable>
+        <Pressable
+          style={{ marginRight: 8 }}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <Ionicons name="person" size={24} color="black" />
+        </Pressable>
+      </View>
     </View>
   );
 };

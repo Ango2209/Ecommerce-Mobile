@@ -17,6 +17,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../features/auth/authSlice";
 // import DismissKeyBoard from "../components/DismissKeyboard";
 const DismissKeyBoard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -27,6 +29,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {

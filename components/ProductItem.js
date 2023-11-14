@@ -32,7 +32,7 @@ const ProductItem = ({ item }) => {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontSize: 15, fontWeight: "bold" }}>{item?.price}</Text>
+        <Text style={{ fontSize: 15, fontWeight: "bold" }}>{item?.price}$</Text>
         {/* <Text>{item?.rating}</Text> */}
       </View>
     </Pressable>
