@@ -106,8 +106,33 @@ const ProfileScreen = () => {
                     </View>
                   );
                 })}
-                <View style={{ margin: 0, alignItems: "flex-end" }}>
-                  <span>Total Amount {item?.totalPrice}$</span>
+
+                <View
+                  style={{
+                    margin: 0,
+                    justifyContent: "space-around",
+                    flexDirection: "row",
+                    marginTop: "30px",
+                  }}
+                >
+                  <View
+                    style={{
+                      width: 80,
+                      height: 25,
+                      backgroundColor: "orange",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 10,
+                    }}
+                  >
+                    <span>{item?.orderStatus}</span>
+                  </View>
+                  <View style={{ flexDirection: "row" }}>
+                    Total Amount:
+                    <span style={{ fontWeight: "bold" }}>
+                      {item?.totalPrice}$
+                    </span>{" "}
+                  </View>
                 </View>
               </View>
             );

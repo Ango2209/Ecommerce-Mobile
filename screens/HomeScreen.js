@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { ScrollView } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";

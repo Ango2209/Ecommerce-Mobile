@@ -20,7 +20,7 @@ import { registerUser } from "../features/auth/authSlice";
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [mobile, setMobile] = useState("");
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
   const navigation = useNavigation();
@@ -157,8 +157,8 @@ const RegisterScreen = () => {
               color="gray"
             />
             <TextInput
-              value={mobileNumber}
-              onChangeText={(text) => setMobileNumber(text)}
+              value={mobile}
+              onChangeText={(text) => setMobile(text)}
               style={{
                 color: "gray",
                 marginVertical: 10,
@@ -224,7 +224,7 @@ const RegisterScreen = () => {
                 firstName,
                 lastName,
                 email,
-                mobileNumber,
+                mobile,
                 password,
               })
             );

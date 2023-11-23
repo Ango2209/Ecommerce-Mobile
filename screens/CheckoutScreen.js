@@ -90,6 +90,9 @@ const CheckoutScreen = () => {
         },
       };
       dispatch(addOrder(orderData));
+      setTimeout(() => {
+        navigation.navigate("Profile");
+      }, 1500);
     } catch (error) {
       console.log("errror", error);
     }
