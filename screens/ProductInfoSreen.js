@@ -406,8 +406,11 @@ const ProductInfoScreen = () => {
               <Pressable
                 onPress={() => {
                   addItemToCart();
-                  navigation.navigate("Cart");
+                  setTimeout(()=>{
+                    navigation.navigate("Cart");
+                  },500)
                   setModalVisible(!modalVisible);
+               
                 }}
                 style={{
                   backgroundColor: "#FFC72C",
